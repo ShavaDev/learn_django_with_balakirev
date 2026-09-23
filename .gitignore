@@ -1,0 +1,26 @@
+# created by virtualenv automatically
+
+# Виртуальное окружение (Virtual Environment)
+venv/
+.venv/
+env/
+ENV/
+
+# Кэш Python и скомпилированные файлы
+__pycache__/
+*.py[cod]
+*$py.class
+
+# База данных SQLite (если используете её локально)
+*.sqlite3
+*.db
+
+# Файлы конфигурации и переменные окружения (секретные ключи, пароли БД)
+.env
+.env.*
+local_settings.py
+
+# Логи работы приложения
+*.log
+logs/
+
