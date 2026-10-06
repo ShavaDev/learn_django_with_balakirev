@@ -44,16 +44,30 @@ def archive(request: HttpRequest, year: int) -> HttpResponse:
     return HttpResponse(f"<h1>Архив по годам</h1><p>year: {year}</p>")
 
 
+menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
+class Myclass:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+
 def main_page(request: HttpRequest) -> HttpResponse:
     # return HttpResponse("<h1><ul>Главная страница</ul></h1>")
     # t = render_to_string("hardware/index.html")
     # return HttpResponse(t)
     # предыдущие две строчки можно объединить одной строкой
-    return render(request, "hardware/index.html" )
+    data = {"title": 'Главная страница',
+            "menu": menu,
+            "float": 28.65,
+            "lst": [1, 2, True, {1,2}, 'abs'],
+            "set": {1,2,3},
+            "dict": {"k1": "val1", "k2": "val2"},
+            "class": Myclass(10, 20)}
+    return render(request, "hardware/index.html", context=data)
 
 
 def about(request: HttpRequest) -> HttpResponse:
-    return render(request, "hardware/about.html")
+    return render(request, "hardware/about.html", context={"title": "О сайте"})
 
 
 def page_not_found(request: HttpRequest, exception: Exception | Http404) -> HttpResponse:
