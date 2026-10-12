@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest, HttpResponseNotFound, Http404
 from django.urls import reverse
 from django.template.loader import render_to_string
+from django.template.defaultfilters import slugify # от туда можно импортировать функции фильтров шаблонов
 
 
 def hd(request: HttpRequest) -> HttpResponse: # hardware
@@ -45,10 +46,17 @@ def archive(request: HttpRequest, year: int) -> HttpResponse:
 
 
 menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
-class Myclass:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+# class Myclass:
+#     def __init__(self, a, b):
+#         self.a = a
+#         self.b = b
+
+
+data_db = [
+    {"id": 1, "title": "Графический процессор", "content": "Описание графического процессора", "is_published": True},
+    {"id": 2, "title": "Центральный процессор", "content": "Описание центрального процессора", "is_published": False},
+    {"id": 3, "title": "Материнская плата", "content": "Описание материнской платы", "is_published": True}
+]
 
 
 def main_page(request: HttpRequest) -> HttpResponse:
@@ -56,13 +64,19 @@ def main_page(request: HttpRequest) -> HttpResponse:
     # t = render_to_string("hardware/index.html")
     # return HttpResponse(t)
     # предыдущие две строчки можно объединить одной строкой
-    data = {"title": 'Главная страница',
-            "menu": menu,
-            "float": 28.65,
-            "lst": [1, 2, True, {1,2}, 'abs'],
-            "set": {1,2,3},
-            "dict": {"k1": "val1", "k2": "val2"},
-            "class": Myclass(10, 20)}
+    # data = {"title": 'главная страница',
+    #         "menu": menu,
+    #         "float": 28.65,
+    #         "lst": [1, 2, True, {1,2}, 'abs'],
+    #         "set": {1,2,3},
+    #         "dict": {"k1": "val1", "k2": "val2"},
+    #         "class": Myclass(10, 20),
+    #         "url": slugify("The Main Page")}
+    data = {
+        "title": "Главная страница",
+        "menu": menu,
+        "posts": data_db,
+    }
     return render(request, "hardware/index.html", context=data)
 
 
@@ -72,3 +86,7 @@ def about(request: HttpRequest) -> HttpResponse:
 
 def page_not_found(request: HttpRequest, exception: Exception | Http404) -> HttpResponse:
     return HttpResponseNotFound("<h1>Страница не найдена!</h1>")
+
+
+def server_error(request: HttpRequest) -> HttpResponse:
+    return HttpResponseNotFound("<h1>Ошибка со стороны сервера</h1>")

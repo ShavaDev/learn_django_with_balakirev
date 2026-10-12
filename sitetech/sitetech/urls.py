@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from hardware import views
-from hardware.views import page_not_found
+from hardware.views import page_not_found, server_error
 
 # такой пример конечно не плохой, но для другого проекта надо будет все эти маршруты копировать, что не удобно
 # следовательно, можно воспользоваться функцией include(), и вынести все маршруты в отдельный файл hardware/urls.py
@@ -34,5 +34,6 @@ urlpatterns = [
     path('', include('hardware.urls')),
 ]
 
-# специальный обработчик
+# специальныe обработчики
 handler404 = page_not_found
+handler500 = server_error
