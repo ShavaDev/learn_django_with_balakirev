@@ -45,7 +45,12 @@ def archive(request: HttpRequest, year: int) -> HttpResponse:
     return HttpResponse(f"<h1>Архив по годам</h1><p>year: {year}</p>")
 
 
-menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
+menu = [
+    {"title": "О сайте", "url_name": "about"},
+    {"title": "Добавить статью", "url_name": "add_page"},
+    {"title": "Обратная связь", "url_name": "contact"},
+    {"title": "Войти", "url_name": "login"},
+]
 # class Myclass:
 #     def __init__(self, a, b):
 #         self.a = a
@@ -82,6 +87,22 @@ def main_page(request: HttpRequest) -> HttpResponse:
 
 def about(request: HttpRequest) -> HttpResponse:
     return render(request, "hardware/about.html", context={"title": "О сайте"})
+
+
+def show_post(request: HttpRequest, post_id: int) -> HttpResponse:
+    return HttpResponse(f"Отображение поста с id = {post_id}")
+
+
+def addpage(request: HttpRequest) -> HttpResponse:
+    return HttpResponse("Добавление статьи")
+
+
+def contact(request: HttpRequest) -> HttpResponse:
+    return HttpResponse("Обратная связь")
+
+
+def login(request: HttpRequest) -> HttpResponse:
+    return HttpResponse("Авторизация")
 
 
 def page_not_found(request: HttpRequest, exception: Exception | Http404) -> HttpResponse:
