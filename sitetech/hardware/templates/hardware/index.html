@@ -6,32 +6,35 @@
 <!--без вывода переменной-->
 <!--{% include 'hardware/includes/nav.html' only %}-->
 <!--или самому передать в nav переменную-->
-{% include 'hardware/includes/nav.html' only with title2='qwerty' %}
+<!--{% include 'hardware/includes/nav.html' only with title2='qwerty' %}-->
 
-<ul>
-    <li>
-        <a href="{% url 'home' %}">Главная страница</a>
-    </li>
-    {% for m in menu %}
-    {% if not forloop.last %}
-    <li>
-        <a href="{% url m.url_name %}">{{ m.title }}</a>
-    </li>
-    {% else %}
-    <li class="last">
-        <a href="{% url m.url_name %}">{{ m.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ul>
+<!--<ul>-->
+<!--    <li>-->
+<!--        <a href="{% url 'home' %}">Главная страница</a>-->
+<!--    </li>-->
+<!--    {% for m in menu %}-->
+<!--    {% if not forloop.last %}-->
+<!--    <li>-->
+<!--        <a href="{% url m.url_name %}">{{ m.title }}</a>-->
+<!--    </li>-->
+<!--    {% else %}-->
+<!--    <li class="last">-->
+<!--        <a href="{% url m.url_name %}">{{ m.title }}</a>-->
+<!--    </li>-->
+<!--    {% endif %}-->
+<!--    {% endfor %}-->
+<!--</ul>-->
 <!--<p>{{ menu|join:" | " }}</p>-->
-<h1>{{ title }}</h1>
+<!--<h1>{{ title }}</h1>-->
 <ul>
     {% for p in posts %}
     {% if p.is_published %}
     <li>
         <h2>{{ p.title }}</h2>
-        <p>{{ p.content }}</p>
+        {% autoescape off %}
+<!--        все теги, находящиеся в контенте не должны быть экранированы-->
+        <p>{{ p.content|linebreaks|truncatewords:40 }}</p>
+        {% endautoescape %}
 <!--        <a href="post/{{ p.id }}">Читать пост</a>-->
         <p><a href="{% url 'post' p.id %}">Читать пост</a></p>
         {% if not forloop.last %}
@@ -43,6 +46,6 @@
 </ul>
 
 <!--с выводом переменной, то есть решает слово only-->
-{% include 'hardware/includes/nav.html' %}
+<!--{% include 'hardware/includes/nav.html' %}-->
 
 {% endblock %}

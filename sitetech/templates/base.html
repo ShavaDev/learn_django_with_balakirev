@@ -1,30 +1,68 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-<!--    <link type="text/css" href="{% static 'hardware/css/styles.css' %}" rel="stylesheet" />-->
-    <link rel="stylesheet" href="{% static 'hardware/css/styles.css' %}">
+    <!-- Параметр ?v=2 заставит браузер принудительно забыть старый кэш -->
+    <link rel="stylesheet" href="{% static 'hardware/css/style.css' %}?v=2">
+    <link rel="shortcut icon" href="{% static 'hardware/images/main.ico' %}" type="image/x-icon"/>
 </head>
 <body>
-<ul>
-    <li>
-        <a href="{% url 'home' %}">Главная страница</a>
-    </li>
-    {% for m in menu %}
-    {% if not forloop.last %}
-    <li>
-        <a href="{% url m.url_name %}">{{ m.title }}</a>
-    </li>
-    {% else %}
-    <li class="last">
-        <a href="{% url m.url_name %}">{{ m.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ul>
+<table class="table-page" border=0 cellpadding="0" cellspacing="0">
+    <tr>
+        <td valign=top>
+            {% block mainmenu %}
+            <div class="header">
+                <ul id="mainmenu" class="mainmenu">
+                    <li class="logo"><a href="{% url 'home' %}">
+                        <div class="logo"></div>
+                    </a></li>
+                    {% for m in menu %}
+                    {% if not forloop.last %}
+                    <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                    {% else %}
+                    <li class="last"><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <div class="clear"></div>
+            </div>
+            {% endblock mainmenu %}
 
-{% block content %} {% endblock %}
+            <table class="table-content" border=0 cellpadding="0" cellspacing="0">
+                <tr>
+                    <!-- Левая боковая панель категорий железа -->
+                    <td valign="top" class="left-chapters">
+                        <ul id="leftchapters">
+                            <li class="selected">Все компоненты</li>
+                            <li><a href="#">Процессоры (CPU)</a></li>
+                            <li><a href="#">Видеокарты (GPU)</a></li>
+                            <li><a href="#">Материнские платы</a></li>
+                            <li><a href="#">Оперативная память</a></li>
+                            <li><a href="#">Хранение данных (SSD/HDD)</a></li>
+                        </ul>
+                    </td>
+                    <!-- Конец левой панели -->
+
+                    <!-- Блок контента -->
+                    <td valign="top" class="content">
+                        <div class="content-text">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td valign=top>
+            <div id="footer">
+                <p>&copy; 2026 Hardware Portal — Энциклопедия компьютерных технологий и архитектуры ПК.</p>
+            </div>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
