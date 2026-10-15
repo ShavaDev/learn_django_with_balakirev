@@ -11,8 +11,8 @@ Class-based views
     1. Add an import:  from other_app.views import Home
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    1. Import the includes() function: from django.urls import includes, path
+    2. Add a URL to urlpatterns:  path('blog/', includes('blog.urls'))
 """
 from django.contrib import admin
 from django.urls import path, include
@@ -20,7 +20,7 @@ from hardware import views
 from hardware.views import page_not_found, server_error
 
 # такой пример конечно не плохой, но для другого проекта надо будет все эти маршруты копировать, что не удобно
-# следовательно, можно воспользоваться функцией include(), и вынести все маршруты в отдельный файл hardware/urls.py
+# следовательно, можно воспользоваться функцией includes(), и вынести все маршруты в отдельный файл hardware/urls.py
 # urlpatterns = [
 #     path('admin/', admin.site.urls),
 #     path('', views.main_page), # http://127.0.0.1:8000/
@@ -30,7 +30,7 @@ from hardware.views import page_not_found, server_error
 # и написать вот таким образом все
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('hardware/', include('hardware.urls')), # теперь будет главный url адрес иметь маршрут http://127.0.0.1:8000/hardware/
+    # path('hardware/', includes('hardware.urls')), # теперь будет главный url адрес иметь маршрут http://127.0.0.1:8000/hardware/
     path('', include('hardware.urls')),
 ]
 

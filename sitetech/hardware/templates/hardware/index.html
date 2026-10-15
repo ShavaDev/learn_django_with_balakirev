@@ -1,39 +1,13 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>{{ title }}</title>-->
-<!--&lt;!&ndash;    <title>{{ main_title|default:"Без заголовка"}}</title>&ndash;&gt;-->
-<!--</head>-->
-<!--<body>-->
-<!--&lt;!&ndash;<p>{{ menu|first }}</p>&ndash;&gt;-->
-<!--&lt;!&ndash;<p>{{ menu|last }}</p>&ndash;&gt;-->
-<!--&lt;!&ndash;<p>{{ menu|join:" | " }}</p>&ndash;&gt;-->
-<!--<p>{{ menu }}</p>-->
-<!--<p>{{ lst }}</p>-->
-<!--<p>{{ set }}</p>-->
-<!--<p>{{ dict.k1 }}</p>-->
-<!--&lt;!&ndash;<p>{{ float|add:"50" }}</p>&ndash;&gt;-->
-<!--<p>{{ float }}</p>-->
-<!--<p>{{ class.a }}</p>-->
-<!--&lt;!&ndash;<h1>{{ title|capfirst }}</h1>&ndash;&gt;-->
-<!--&lt;!&ndash;<h1>{{ title|upper }}</h1>&ndash;&gt;-->
-<!--&lt;!&ndash;<h1>{{ title|lower }}</h1>&ndash;&gt;-->
-<!--&lt;!&ndash;<h1>{{ title|cut:" "|cut:"а" }}</h1>&ndash;&gt;-->
-<!--&lt;!&ndash;<p>{{ "The Main Page"|slugify }}</p>&ndash;&gt;-->
-<!--<p>{{ url }}</p>-->
-<!--<h1>{{ title }}</h1>-->
-<!--</body>-->
-<!--</html>-->
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ title }}</h1>
 
+<!--в nav.html доступны все те же переменные что и в index.html-->
+<!--без вывода переменной-->
+<!--{% include 'hardware/includes/nav.html' only %}-->
+<!--или самому передать в nav переменную-->
+{% include 'hardware/includes/nav.html' only with title2='qwerty' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
 <ul>
     <li>
         <a href="{% url 'home' %}">Главная страница</a>
@@ -67,5 +41,8 @@
     {% endif %}
     {% endfor %}
 </ul>
-</body>
-</html>
+
+<!--с выводом переменной, то есть решает слово only-->
+{% include 'hardware/includes/nav.html' %}
+
+{% endblock %}

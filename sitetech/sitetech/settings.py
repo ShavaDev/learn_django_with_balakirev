@@ -55,7 +55,9 @@ ROOT_URLCONF = 'sitetech.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [], # позволяет прописывать нестандартные пути к шаблонам
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ], # позволяет прописывать нестандартные пути к шаблонам
         'APP_DIRS': True, # отвечает за поиск шаблонов в приложении если они зарегистрированы
         'OPTIONS': {
             'context_processors': [

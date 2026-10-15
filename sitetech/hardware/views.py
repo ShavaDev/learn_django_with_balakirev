@@ -86,7 +86,7 @@ def main_page(request: HttpRequest) -> HttpResponse:
 
 
 def about(request: HttpRequest) -> HttpResponse:
-    return render(request, "hardware/about.html", context={"title": "О сайте"})
+    return render(request, "hardware/about.html", context={"title": "О сайте", "menu": menu})
 
 
 def show_post(request: HttpRequest, post_id: int) -> HttpResponse:
