@@ -28,7 +28,7 @@ register_converter(converters.FourDigitYearConverter, "year4")
 urlpatterns = [
     path('', views.main_page, name="home"), # отвечает за главную страницу
     path('hardware/', views.hd, name="hardware"), # отвечает за страницу, где есть суффикс hardware/
-    path('categories/<int:cat_id>/', views.categories, name="categories_id"), # отвечает за страницу, где есть суффикс categories/
+    # path('categories/<int:cat_id>/', views.categories, name="categories_id"), # отвечает за страницу, где есть суффикс categories/
     # в данном случае присутствует конвертор int (целое число), а после идет переменная, которое содержит число
     path('categories/<slug:cat_slug>/', views.categories_by_slug, name="categories_slug"), # другой инвертор slug, и символы и цифры
     # если по каким-то причинам конверторов недостаточно, тогда можно прописать свой:
@@ -39,4 +39,5 @@ urlpatterns = [
     path("contact/", views.contact, name="contact"),
     path("login/", views.login, name="login"),
     path("addpage/", views.addpage, name="add_page"),
+    path("category/<int:cat_id>/", views.show_category, name="category"),
 ]

@@ -70,6 +70,15 @@ data_db = [
 ]
 
 
+categories_db = [
+    {"id": 1, "name": "Процессоры (CPU)"},
+    {"id": 2, "name": "Видеокарты (GPU)"},
+    {"id": 3, "name": "Материнские платы"},
+    {"id": 4, "name": "Оперативная память"},
+    {"id": 5, "name": "Хранение данных (SSD/HDD)"},
+]
+
+
 def main_page(request: HttpRequest) -> HttpResponse:
     # return HttpResponse("<h1><ul>Главная страница</ul></h1>")
     # t = render_to_string("hardware/index.html")
@@ -87,6 +96,7 @@ def main_page(request: HttpRequest) -> HttpResponse:
         "title": "Главная страница",
         "menu": menu,
         "posts": data_db,
+        "cat_selected": 0,
     }
     return render(request, "hardware/index.html", context=data)
 
@@ -105,6 +115,16 @@ def addpage(request: HttpRequest) -> HttpResponse:
 
 def contact(request: HttpRequest) -> HttpResponse:
     return HttpResponse("Обратная связь")
+
+
+def show_category(request: HttpRequest, cat_id: int) -> HttpResponse:
+    data = {
+        "title": "Главная страница",
+        "menu": menu,
+        "posts": data_db,
+        "cat_selected": 0,
+    }
+    return render(request, "hardware/index.html", context=data)
 
 
 def login(request: HttpRequest) -> HttpResponse:

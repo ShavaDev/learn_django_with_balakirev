@@ -1,4 +1,5 @@
 {% load static %}
+{% load hardware_tags %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -35,12 +36,19 @@
                     <!-- Левая боковая панель категорий железа -->
                     <td valign="top" class="left-chapters">
                         <ul id="leftchapters">
+<!--                            теперь данные тега не отображаются, а помещаются в переменную (ссылку) categories-->
+<!--                            {% get_categories as categories %}-->
                             <li class="selected">Все компоненты</li>
-                            <li><a href="#">Процессоры (CPU)</a></li>
-                            <li><a href="#">Видеокарты (GPU)</a></li>
-                            <li><a href="#">Материнские платы</a></li>
-                            <li><a href="#">Оперативная память</a></li>
-                            <li><a href="#">Хранение данных (SSD/HDD)</a></li>
+<!--                            {% for cat in categories %}-->
+<!--                            <li><a href="{% url 'category' cat.id %}">{{ cat.name }}</a></li>-->
+<!--                            {% endfor %}-->
+<!--                            дополнительно передаем еще переменную cat_selected-->
+                                {% show_categories cat_selected%}
+<!--                            <li><a href="#">Процессоры (CPU)</a></li>-->
+<!--                            <li><a href="#">Видеокарты (GPU)</a></li>-->
+<!--                            <li><a href="#">Материнские платы</a></li>-->
+<!--                            <li><a href="#">Оперативная память</a></li>-->
+<!--                            <li><a href="#">Хранение данных (SSD/HDD)</a></li>-->
                         </ul>
                     </td>
                     <!-- Конец левой панели -->
